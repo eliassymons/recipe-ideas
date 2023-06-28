@@ -52,7 +52,8 @@ function IngredientForm() {
           // setIngredients([]);
           // setRecipe({}); // Process the received recipe idea
         } else {
-          console.error("Failed to fetch recipe idea");
+          const errorData = await response.json();
+          console.error("Failed to fetch recipe idea:", errorData.message);
         }
       } catch (error) {
         console.error("Error sending ingredients to backend:", error);
