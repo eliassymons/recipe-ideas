@@ -1,6 +1,12 @@
 import openai from "../../app/utils/openai";
+import Cors from "cors";
+
+const cors = Cors({
+  methods: ["POST"],
+});
 
 export default async function handler(req, res) {
+  await cors(req, res);
   if (req.method === "POST") {
     const { ingredients } = req.body;
 
