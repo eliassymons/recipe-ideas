@@ -1,7 +1,7 @@
 import openai from "../../app/utils/openai";
 
 export default async function handler(req, res) {
-  if (req.method === "POST") {
+  if (req.method === "POST" || req.method === "OPTIONS") {
     const { ingredients } = req.body;
 
     // Handle the POST request for ingredients
