@@ -68,16 +68,14 @@ function IngredientForm() {
   };
   console.log(isLoading);
   return (
-    <div className="w-[90%] mx-auto mt-4 flex flex-col items-center md:w-[40%] lg:w-[30%]">
+    <div className="w-[90%] mx-auto  flex flex-col items-center sm:w-[80%] md:w-[70%] lg:w-[42%]">
+      {" "}
       {ingredients.length === 0 && (
         <h2 className="text-xl">What's in your pantry?</h2>
       )}
-      <ul className="text-center mt-10 flex space-x-1 mb-4 flex-wrap items-center justify-center w-[80%] ">
+      <ul className="gap-[.2rem] text-center mt-10 md:text-xl flex space-x-1 mb-4 flex-wrap items-center justify-center w-[80%] max-w-[22rem] ">
         {ingredients.map((ingredient, index) => (
-          <li
-            className="text-md bg-gray-200 px-2 rounded-full mt-1"
-            key={index}
-          >
+          <li className="text-md bg-gray-200 px-2 rounded-full  " key={index}>
             {ingredient}
           </li>
         ))}
@@ -88,7 +86,7 @@ function IngredientForm() {
           className="flex max-w-[80%] items-center justify-center space-x-4 relative "
         >
           <input
-            className="outline outline-1 outline-slate-300 rounded-md py-2 px-4 text-center focus:outline-2 max-w-[100%]"
+            className="outline outline-1 outline-slate-300 rounded-md py-2 px-4 text-center md:text-xl focus:outline-2 max-w-[100%]"
             type="text"
             value={inputValue}
             onChange={handleInputChange}
@@ -104,36 +102,57 @@ function IngredientForm() {
         </form>
       )}
       {ingredients.length > 0 && !isLoading && (
-        <button
-          className="px-4 py-2  rounded-full mt-6 bg-green-300 hover:bg-green-200 hover:bg-green-400 w-[12rem]"
-          onClick={handleSubmit}
-        >
-          {!submitted ? "Submit " : "Regenerate"}
+        <button className=" mt-6 " onClick={handleSubmit}>
+          {!submitted ? (
+            <div className="p-2 rounded-full bg-green-500 fixed  right-4 bottom-40 sm:static group hover:bg-green-600 ">
+              <img
+                src="/upload.svg"
+                alt="submit"
+                className="w-8 bg-green-500  rounded-full md:w-10 group-hover:bg-green-600 "
+              />
+            </div>
+          ) : (
+            <div className="p-2 rounded-full bg-green-500 opacity-80 hover:opacity-100  fixed right-4 bottom-20 lg:right-[25%] lg:bottom-[42%]">
+              <img
+                src="/redo.svg"
+                alt="redo"
+                className="w-8  rounded-full md:w-10"
+              />
+            </div>
+          )}
         </button>
       )}
       {ingredients.length > 0 &&
         Object.keys(recipe).length === 0 &&
         !isLoading && (
-          <button
-            className=" px-4 py-2  rounded-full  mt-4 bg-red-300 hover:bg-red-400 w-[12rem] "
-            onClick={handleDeleteIngredients}
-          >
-            Delete Ingredients
+          <button className="  mt-4  " onClick={handleDeleteIngredients}>
+            <div className="p-2 rounded-full bg-red-500 absolute right-4 bottom-20 sm:static group hover:bg-red-600">
+              <img
+                src="/remove.svg"
+                alt="remove"
+                className="w-8 bg-red-500 rounded-full md:w-10  group-hover:bg-red-600"
+              />
+            </div>
           </button>
         )}
       {isLoading && (
-        <div className="mt-8 flex flex-col items-center">
-          <h3>Consulting the chef...</h3>
+        <div className="mt-8 flex flex-col items-center text-slate-600">
+          <h3 className="text-xl md:text-2xl font-bold">
+            Consulting the chef...
+          </h3>
           <NewtonsCradle size={70} color="grey" lineWeight={2} />
         </div>
       )}
       {Object.keys(recipe).length > 0 && !isLoading && (
         <div className="flex flex-col items-center justify-center">
-          <button
-            className="px-4 py-2  rounded-full mt-4 bg-red-300 hover:bg-red-400 w-[12rem] "
-            onClick={handleClear}
-          >
-            Clear Recipe
+          <button className="   mt-4   " onClick={handleClear}>
+            <div className=" rounded-full opacity-80 hover:opacity-100 fixed right-4 bottom-40 lg:right-[25%] lg:bottom-[50%]">
+              <img
+                src="/clear.svg"
+                alt="clear"
+                className="w-12  rounded-full md:w-14 "
+              />
+            </div>
           </button>
           <Recipe
             title={recipe.title}

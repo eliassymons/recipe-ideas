@@ -1,12 +1,6 @@
 import openai from "../../app/utils/openai";
-import Cors from "cors";
-
-const cors = Cors({
-  methods: ["POST"],
-});
 
 export default async function handler(req, res) {
-  await cors(req, res);
   if (req.method === "POST") {
     const { ingredients } = req.body;
 
@@ -18,7 +12,7 @@ export default async function handler(req, res) {
     // Generate the recipe idea using ChatGPT
     const prompt = `These are my ingredients: ${ingredients.join(
       ", "
-    )}. Generate a recipe for a main dish based on the given ingredients. You can add other ingredients that I didn't include in order to make a more developed recipe, as long as my ingredients are included. You don't have to include all the ingredients I provide in the title. The response should be in the following format:
+    )}. Generate a recipe for a main dish based on the given ingredients. You can add other ingredients that I didn't include in order to make a more developed recipe, as long as my ingredients are included. The recipe description should be at least 3 sentences. The response should be in the following format:
     {
       "title": "Recipe Title",
       "ingredients": [
